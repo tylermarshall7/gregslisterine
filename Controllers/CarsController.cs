@@ -81,7 +81,7 @@ namespace gregslist_api.Controllers
                 {
                     throw new Exception("You must be logged in to make a car, yo.");
                 }
-                newCar.UserId = user.Value;
+                newCar.User = user.Value;
                 return Ok(_service.Create(newCar));
             }
             catch (System.Exception err)
@@ -119,7 +119,7 @@ namespace gregslist_api.Controllers
                 {
                     throw new Exception("You must be logged in to make a car, yo.");
                 }
-                updatedCar.UserId = user.Value;
+                updatedCar.User = user.Value;
                 updatedCar.Id = id;
                 return Ok(_service.Update(updatedCar));
             }

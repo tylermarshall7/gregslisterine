@@ -22,7 +22,7 @@ namespace gregslist_api.Repositories
         }
         public IEnumerable<Car> Get(string userId)
         {
-            string sql = "SELECT * FROM cars WHERE userId = @UserId;";
+            string sql = "SELECT * FROM cars WHERE user = @User;";
             return _db.Query<Car>(sql, new { userId });
         }
 
@@ -35,16 +35,16 @@ namespace gregslist_api.Repositories
         public Car Create(Car newCar)
         {
             string sql = @"INSERT INTO cars
-            (make, model, year, price, imgUrl, description, userId)
+            (make, model, year, price, imgUrl, description, user)
             VALUES
-            (@make, @model, @year, @price, @imgUrl, @description, @userId);
+            (@make, @model, @year, @price, @imgUrl, @description, @user);
             SELECT LAST_INSERT_ID();";
             newCar.Id = _db.ExecuteScalar<int>(sql, newCar);
             return newCar;
         }
         public bool Delete(string userId, int id)
         {
-            string sql = "DELETE FROM cars WHERE id = @Id AND userId = @UserId LIMIT 1;";
+            string sql = "DELETE FROM cars WHERE id = @Id AND user = @User LIMIT 1;";
             int rowsAffected = _db.Execute(sql, new { userId, id });
             return rowsAffected == 1;
         }
@@ -59,7 +59,7 @@ namespace gregslist_api.Repositories
             description = @description,
             imgUrl = @imgUrl,
             year = @year
-            WHERE id = @id AND userId = @userId LIMIT 1;";
+            WHERE id = @id AND user = @user LIMIT 1;";
             int rowsAffected = _db.Execute(sql, updatedCar);
             return rowsAffected == 1;
         }
