@@ -1,0 +1,16 @@
+.btn-primary{
+  color: $light;
+}
+
+.row.overflow-page{
+    width: 100vw;
+    flex-wrap: nowrap !important;
+  overflow-x: scroll !important;
+}
+
+.page-height{
+  height: 100vh !important;
+  }
+  .list-height{
+    min-height: 100% !important;
+    }
